@@ -278,14 +278,14 @@
           this.file = this.$refs.fileEdit.files[0];
         },
         deleteProduct: function (id) {
-          axios.delete(`http://localhost:3000/products/${id}`, {
+          axios.delete(`http://pepestore-server.arjunagbt.icu/products/${id}`, {
             headers:{
               token: localStorage.getItem('token')
             }
           })
             .then(function (data) {
               console.log(data)
-              return axios.get('http://localhost:3000/products')
+              return axios.get('http://pepestore-server.arjunagbt.icu/products')
             })
             .then(response => {
               //console.log(response)
@@ -317,14 +317,14 @@
           formData.append('category', this.value)
           formData.append('stock', this.productStock)
           formData.append('price', this.productPrice)
-          axios.put(`http://localhost:3000/products/${this.editId}`, formData, {
+          axios.put(`http://pepestore-server.arjunagbt.icu/products/${this.editId}`, formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
               token: localStorage.getItem('token')
             }
           })
             .then(function (data) {
-              return axios.get('http://localhost:3000/products')
+              return axios.get('http://pepestore-server.arjunagbt.icu/products')
 
             })
             .then(response => {
@@ -339,7 +339,7 @@
           return number.toLocaleString('en-ID', { style: 'currency', currency: 'IDR' })
         },
         getDetail: function (id) {
-          axios.get(`http://localhost:3000/transactions/${id}`, {
+          axios.get(`http://pepestore-server.arjunagbt.icu/transactions/${id}`, {
             headers: {
               token: localStorage.getItem('token')
             }
@@ -381,14 +381,14 @@
           formData.append('category', this.value)
           formData.append('stock', this.productStock)
           formData.append('price', this.productPrice)
-          axios.post('http://localhost:3000/products', formData, {
+          axios.post('http://pepestore-server.arjunagbt.icu/products', formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
               token: localStorage.getItem('token')
             }
           })
             .then(function (data) {
-              return axios.get('http://localhost:3000/products')
+              return axios.get('http://pepestore-server.arjunagbt.icu/products')
 
             })
             .then(response => {
@@ -407,15 +407,15 @@
       },
       mounted: function () {
         if (localStorage.getItem('token')) {
-          axios.get('http://localhost:3000/products')
+          axios.get('http://pepestore-server.arjunagbt.icu/products')
             .then(response => {
               //console.log(response)
               this.products = response.data.result
-              return axios.get('http://localhost:3000/products/categories')
+              return axios.get('http://pepestore-server.arjunagbt.icu/products/categories')
             })
             .then(data => {
               this.categories = data.data.result
-              return axios.get('http://localhost:3000/transactions', {
+              return axios.get('http://pepestore-server.arjunagbt.icu/transactions', {
                 headers: {
                   token: localStorage.getItem('token')
                 }

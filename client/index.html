@@ -363,7 +363,7 @@
       },
       methods: {
         addProduct: function (data) {
-          axios.patch('http://localhost:3000/users/cart', {
+          axios.patch('http://pepestore-server.arjunagbt.icu/users/cart', {
             productId: data
           }, {
             headers: {
@@ -378,7 +378,7 @@
           })
         },
         removeCartItem: function(id) {
-          axios.patch('http://localhost:3000/users/cart/remove', {
+          axios.patch('http://pepestore-server.arjunagbt.icu/users/cart/remove', {
             productId: id
           }, {
             headers: {
@@ -397,7 +397,7 @@
           this.cart.forEach((element, index) => {
             sum += element.price
           })
-          axios.post('http://localhost:3000/users/cart/checkout', {
+          axios.post('http://pepestore-server.arjunagbt.icu/users/cart/checkout', {
             products: this.cart,
             totalPrice: sum
           }, {
@@ -407,7 +407,7 @@
           })
           .then(response => {
             this.cart = response.data.result.products
-            return axios.get('http://localhost:3000/users/cart/invoice', {
+            return axios.get('http://pepestore-server.arjunagbt.icu/users/cart/invoice', {
               headers: {
                 token: localStorage.getItem('token')
               }
@@ -421,7 +421,7 @@
           })
         },
         allProducts: function (event) {
-          axios.get('http://localhost:3000/products')
+          axios.get('http://pepestore-server.arjunagbt.icu/products')
             .then(response => {
               this.products = response.data.result
             })
@@ -430,7 +430,7 @@
             })
         },
         filterByCategory: function (data) {
-          axios.get('http://localhost:3000/products')
+          axios.get('http://pepestore-server.arjunagbt.icu/products')
             .then(response => {
               this.products = response.data.result.filter(value => {
                 return value.categoryId.name === data
@@ -488,7 +488,7 @@
           return output
         },
         register: function () {
-          axios.post('http://localhost:3000/users', {
+          axios.post('http://pepestore-server.arjunagbt.icu/users', {
             name: this.registerNameInput,
             email: this.registerEmailInput,
             password: this.registerPasswordInput
@@ -503,7 +503,7 @@
             })
         },
         signin: function () {
-          axios.post('http://localhost:3000/users/login', {
+          axios.post('http://pepestore-server.arjunagbt.icu/users/login', {
             email: this.loginEmailInput,
             password: this.loginPasswordInput
           })
@@ -514,7 +514,7 @@
               if (localStorage.getItem('role') === 'admin') {
                 this.isAdmin = true
               }
-              return axios.get('http://localhost:3000/users/cart', {
+              return axios.get('http://pepestore-server.arjunagbt.icu/users/cart', {
                 headers: {
                   token: localStorage.getItem('token')
                 }
@@ -541,7 +541,7 @@
       mounted: function () {
         if (localStorage.getItem('token')) {
           this.isLogin = true
-          axios.get('http://localhost:3000/users/cart', {
+          axios.get('http://pepestore-server.arjunagbt.icu/users/cart', {
             headers: {
               token: localStorage.getItem('token')
             }
@@ -558,7 +558,7 @@
         if (localStorage.getItem('role') === 'admin') {
           this.isAdmin = true
         }
-        axios.get('http://localhost:3000/products')
+        axios.get('http://pepestore-server.arjunagbt.icu/products')
           .then(response => {
             this.products = response.data.result
           })
